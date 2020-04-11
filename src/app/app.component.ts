@@ -3,9 +3,9 @@ import { NgwWowService } from 'ngx-wow';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  selector: "app-root",
+  templateUrl: "./app.component.html",
+  styleUrls: ["./app.component.scss"],
 })
 export class AppComponent  implements OnInit {
 

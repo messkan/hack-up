@@ -23,9 +23,8 @@
             <a href="" class="indigo-text mx-2">
               <img src="https://mdbootstrap.com/img/Photos/Avatars/img%20(9).jpg" class="rounded z-depth-1"
               style="width: 51px; height: 51px;">
-              <strong class="ml-1">John Doe</strong>
-             
-
+              <strong class="ml-1">{{user.firstName}}</strong> {{user.lastName}}
+            
             </a>
             <br>
             <br>
@@ -82,18 +81,18 @@
           <p class="mb-4">
             <strong>
             <a href="" class="indigo-text mx-2">
-              <img [src]="post.userImage" class="rounded z-depth-1"
+              <img src="https://mdbootstrap.com/img/Photos/Avatars/img%20(9).jpg" class="rounded z-depth-1"
               style="width: 51px; height: 51px;">
-              <strong class="ml-1">{{post.userName}}</strong>
+              <strong class="ml-1">{{post.author.firstName}} {{post.author.lastName}}</strong>
             </a>
             <br>
             <br>
-            <strong> Posted {{post.datePost}}</strong>
+            <strong> Posted {{post.createdAt}}</strong>
             </strong>
           </p>
 
       </div>
-        <p>{{post.postDescription}} </p>
+        <p>{{post.title}} </p>
 			
 	  
 			<!-- Interactions -->
@@ -161,12 +160,13 @@
               [src]="comment.userImage" alt="Generic placeholder image">
             <div class="media-body text-center text-md-left ml-md-3 ml-0">
               <p class="font-weight-bold my-0">
-                {{comment.userName}}
+                {{comment.author.firstName}}   {{comment.author.lastName}}
+
                 <a href="" class="pull-right ml-1">
                   <!-- <i class="fas fa-reply"></i> -->
                 </a>
               </p>
-              {{comment.userDescription}}
+              {{comment.title}}
             </div>
             
           <!-- like -->
@@ -188,10 +188,10 @@
 
           <div class="form-group mt-4">
             <label for="quickReplyFormComment">Your comment</label>
-            <textarea class="form-control" id="quickReplyFormComment" rows="5" [(ngModel)]="comment"></textarea>
+            <textarea class="form-control" id="quickReplyFormComment" rows="5" [(ngModel)]="mp[post._id]"></textarea>
 
             <div class="text-center my-4">
-              <button class="btn btn-info btn-sm" type="submit" (click)="addcomment()">Post</button>
+              <button class="btn btn-info btn-sm" type="submit" (click)="addcomment(post._id)">Post</button>
             </div>
           </div>
     </section>

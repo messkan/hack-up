@@ -6,6 +6,7 @@ import {
 } from "@angular/common/http";
 import { environment } from "../../environments/environment";
 import { Router } from "@angular/router";
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: "root",
@@ -23,10 +24,16 @@ export class LoginService {
       { headers: this.headers, observe: "response" }
     );
   }
+  getCurrentUser() : Observable <any>{
+    return this.http.get<any>(
+      this.apiUrl +'/user/current',
+      { headers: this.headers }
+    );
 
+  }
   logout() {
     localStorage.clear();
-    this.router.navigate(["/"]);
+    this.router.navigate(["/login"]);
   }
 
   loggedIn(): boolean {

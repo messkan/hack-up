@@ -37,13 +37,11 @@ export class QuestionService {
       this.httpOptions
     );
   }
-  getAllQuestions(): Observable<any> {
-    return this.httpClient.get<any>(
-      this.apiUrl + "/question/getAll/",
+
+  findAll(): Observable<Question[]> {
+    return this.httpClient.get<Question[]>(
+      this.apiUrl + "/question",
       this.httpOptions
     );
   }
-
-
-
 }

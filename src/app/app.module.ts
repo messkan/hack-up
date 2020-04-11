@@ -17,6 +17,12 @@ import { SourcesComponent } from "./sources/sources.component";
 import { VerifyaccountComponent } from "./verifyaccount/verifyaccount.component";
 import { ToastrModule } from 'ngx-toastr';
 import { MDBBootstrapModule } from "angular-bootstrap-md";
+import { environment } from 'src/environments/environment';
+
+const   apiUrl: string = environment.apiUrl;
+const   domain: string = environment.domain;
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,8 +48,8 @@ import { MDBBootstrapModule } from "angular-bootstrap-md";
       config: {
         tokenGetter: function  tokenGetter() {
              return     localStorage.getItem('token');},
-        whitelistedDomains: ['d0aedfc1.ngrok.io/'],
-        blacklistedRoutes: ['http://d0aedfc1.ngrok.io/user/login','http://d0aedfc1.ngrok.io/user/signup']
+        whitelistedDomains: [domain],
+        blacklistedRoutes: [apiUrl+'/user/login',apiUrl+'/user/signup']
       }
     })
   ],

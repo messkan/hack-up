@@ -14,11 +14,14 @@ export class CommentService {
     }),
   };
   constructor(private httpClient: HttpClient) {}
+  
+  mp : Map<string , number >  ; 
+
 
   newComment(obj, id): Observable<any> {
     return this.httpClient.post<any>(
       this.apiUrl + "/comment/new/" + id,
-      obj,
+      {'title': obj},
       this.httpOptions
     );
   }
