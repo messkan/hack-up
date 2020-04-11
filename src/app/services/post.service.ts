@@ -1,4 +1,7 @@
 import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
+import { Observable } from 'rxjs';
 
 interface Comment {
   userName : string ; 
@@ -46,5 +49,28 @@ export class PostService {
     
   ]
 
-  constructor() { }
+  httpOptions = {
+    headers: new HttpHeaders({
+      "Content-Type": "application/json",
+    }),
+  };
+  apiUrl = environment.apiUrl;
+
+
+  constructor(private http : HttpClient) { }
+  
+  
+ getPosts(category): Observable<any> {
+  return this.http.get<any>(
+    this.apiUrl + "/news/" + category,
+    this.httpOptions
+  );
 }
+
+
+
+
+
+
+}
+

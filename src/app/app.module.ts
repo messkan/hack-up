@@ -37,7 +37,15 @@ import { MDBBootstrapModule } from "angular-bootstrap-md";
     InfiniteScrollModule,
     HttpClientModule,
     FormsModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: function  tokenGetter() {
+             return     localStorage.getItem('token');},
+        whitelistedDomains: ['d0aedfc1.ngrok.io/'],
+        blacklistedRoutes: ['http://d0aedfc1.ngrok.io/user/login','http://d0aedfc1.ngrok.io/user/signup']
+      }
+    })
   ],
   providers: [],
   bootstrap: [AppComponent],

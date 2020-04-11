@@ -1,7 +1,7 @@
-import { Component, OnInit, AfterViewInit, ViewChild, ChangeDetectorRef } from '@angular/core';
-import { MdbTablePaginationComponent, MdbTableDirective } from 'projects/angular-bootstrap-md/src/public_api';
+import { Component, OnInit } from '@angular/core';
 import { NgwWowService } from 'ngx-wow';
 import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -13,31 +13,24 @@ export class AppComponent  implements OnInit {
   user : any  = {
       name : 'hamdi rhibi' , 
       verified : true ,
-      userImage : 'https://mdbootstrap.com/img/Photos/Avatars/img (21).jpg'
+      //userImage : 'https://mdbootstrap.com/img/Photos/Avatars/img (21).jpg'
   }
-  constructor(private wowService: NgwWowService,private toastr: ToastrService) {
+  constructor(private wowService: NgwWowService,private toastr: ToastrService,private router : Router) {
     this.wowService.init();
   }
 
 
   ngOnInit() {
-      this.showToaster(); 
+      if (!localStorage.getItem('token')) {
+          this.router.navigate(['/login'])
+      }
   }
   showToaster(){
     this.toastr.success("Hello, I'm the toastr message.")
-}
-
-
-
-  save(event: any): void {
-    var selectedFiles = event.target.files;
-    for (var i = 0; i < selectedFiles.length; i++) {
-      this.result += '<br>File Name: ' + selectedFiles[i].name;
-      this.result += '<br>File Size(byte): ' + selectedFiles[i].size;
-      this.result += '<br>File Type: ' + selectedFiles[i].type;
-      this.result += '<br>----------------------------';
-    }
   }
+
+
+
 
 
 
