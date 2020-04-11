@@ -37,4 +37,11 @@ export class QuestionService {
       this.httpOptions
     );
   }
+
+  findAll(): Observable<Question[]> {
+    return this.httpClient.get<Question[]>(
+      this.apiUrl + "/question",
+      this.httpOptions
+    );
+  }
 }

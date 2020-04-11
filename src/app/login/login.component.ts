@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { User } from "../../models/User";
 import { LoginService } from "../services/login.service";
 import { Router } from "@angular/router";
+import { ToastrService } from "ngx-toastr";
 
 @Component({
   selector: "app-login",
@@ -12,7 +13,11 @@ export class LoginComponent implements OnInit {
   email: String;
   password: String;
 
-  constructor(private loginService: LoginService, private router: Router) {}
+  constructor(
+    private loginService: LoginService,
+    private router: Router,
+    private toaster: ToastrService
+  ) {}
 
   ngOnInit(): void {}
   logIn() {
@@ -21,13 +26,16 @@ export class LoginComponent implements OnInit {
         if (response.status === 200) {
           console.log(response.body);
           localStorage.setItem("token", response.body.token);
-
-          this.router.navigate(["/login"]);
+          this.showToaster();
+          this.router.navigate(["/home"]);
         }
       },
       (err) => {
         // error
       }
     );
+  }
+  showToaster() {
+    this.toaster.success("You're welcome ");
   }
 }
