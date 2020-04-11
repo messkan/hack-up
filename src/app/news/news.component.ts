@@ -15,16 +15,14 @@ export class NewsComponent implements OnInit {
   constructor(private newsService : NewsService,
               private http : HttpClient,
               private router : Router ,
-              private route : ActivatedRoute
-    ){
+              private route : ActivatedRoute){
       
-  }
+              }
   ngOnInit(): void {
     this.id=this.route.snapshot.paramMap.get('id'); 
     console.log(this.id); 
       this.load();
   }
-
 
   load() {
     this.newsService
