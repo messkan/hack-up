@@ -15,6 +15,7 @@ import { FormsModule } from "@angular/forms";
 import { JwtModule } from "@auth0/angular-jwt";
 import { SourcesComponent } from "./sources/sources.component";
 import { VerifyaccountComponent } from "./verifyaccount/verifyaccount.component";
+import { ToastrModule } from 'ngx-toastr';
 import { MDBBootstrapModule } from "angular-bootstrap-md";
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { MDBBootstrapModule } from "angular-bootstrap-md";
     InfiniteScrollModule,
     HttpClientModule,
     FormsModule,
+    ToastrModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent],
