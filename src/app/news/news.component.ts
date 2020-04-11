@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NewsService } from '../services/news.service';
 import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-news',
@@ -9,27 +9,26 @@ import { Router } from '@angular/router';
   styleUrls: ['./news.component.css']
 })
 export class NewsComponent implements OnInit {
-
+  id : string ; 
   page : number = 1 ; 
   data : any ; 
   constructor(private newsService : NewsService,
               private http : HttpClient,
-              private router : Router 
+              private router : Router ,
+              private route : ActivatedRoute
     ){
-  
+      
   }
   ngOnInit(): void {
+    this.id=this.route.snapshot.paramMap.get('id'); 
+    console.log(this.id); 
       this.load();
   }
 
 
   load() {
     this.newsService
-    .getData(
-      `top-headlines?country=us&&category=health&&pageSize=5&&page=${
-        this.page
-      }`
-    )
+    .getData(this.id)
     .subscribe(data => {
       console.log(data);
       this.data = data;
@@ -38,11 +37,12 @@ export class NewsComponent implements OnInit {
   }
 
 
-
+  //"https://newsapi.org/v2/top-headlines?country=us&&category=health&&pageSize=5&page="+this.page+"&&apiKey=4d97ac9b1619491ca1eccf0687e0305e"
+    
   onscroll() {
     this.page++;
     this.http
-    .get("https://newsapi.org/v2/top-headlines?country=us&&category=health&&pageSize=5&page="+this.page+"&&apiKey=4d97ac9b1619491ca1eccf0687e0305e")
+    .get(this.id)
     .subscribe(data => {
       for (const article of data['articles']) {
         this.data.articles.push(article);
