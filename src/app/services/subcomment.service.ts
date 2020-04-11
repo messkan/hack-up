@@ -1,39 +1,38 @@
 import { Injectable } from "@angular/core";
 import { environment } from "../../environments/environment";
-import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { Question } from "../../models/Question";
+import { HttpHeaders, HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
+
 @Injectable({
   providedIn: "root",
 })
-export class QuestionService {
+export class SubcommentService {
   apiUrl: string = environment.apiUrl;
   httpOptions = {
     headers: new HttpHeaders({
       "Content-Type": "application/json",
     }),
   };
-
   constructor(private httpClient: HttpClient) {}
 
-  newQuestion(obj): Observable<Question> {
+  newSubComment(obj, id): Observable<any> {
     return this.httpClient.post<any>(
-      this.apiUrl + "/question/new",
+      this.apiUrl + "/subcomment/new/" + id,
       obj,
       this.httpOptions
     );
   }
 
-  likeQuestion(id): Observable<any> {
+  likeSubComment(id): Observable<any> {
     return this.httpClient.put<any>(
-      this.apiUrl + "/question/like/" + id,
+      this.apiUrl + "/subcomment/like/" + id,
       this.httpOptions
     );
   }
 
-  dislikeQuestion(id): Observable<any> {
+  dislikeSubComment(id): Observable<any> {
     return this.httpClient.put<any>(
-      this.apiUrl + "/question/dislike/" + id,
+      this.apiUrl + "/subcomment/dislike/" + id,
       this.httpOptions
     );
   }
